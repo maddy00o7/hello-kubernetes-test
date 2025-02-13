@@ -27,8 +27,7 @@ jobs:
       - name: Build and Tag Docker Image
         run: |
           IMAGE_TAG=$(git rev-parse --short HEAD)
-          cd fastapi-service  # Change directory before building
-          docker build -t ${{ secrets.ECR_REPO }} -f Dockerfile .
+          docker build -t ${{ secrets.ECR_REPO }} -f fastapi-service/Dockerfile fastapi-service/
           docker tag ${{ secrets.ECR_REPO }}:latest ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPO }}:$IMAGE_TAG
           docker tag ${{ secrets.ECR_REPO }}:latest ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPO }}:latest
 
